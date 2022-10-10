@@ -1,0 +1,27 @@
+.LabelText {
+    width: 270px;
+    height: 150px;
+    position: relative;
+    right: 50px;
+    top: 15px;
+    font-size: 16px;
+    font-weight: medium;
+    color: black;
+}
+
+.LabelDate {
+    position: relative;
+    right: 100px;
+    top: 190px;
+    font-weight: medium;
+    color: black;
+}
+
+.ButtonDelete {
+    position: relative;
+    left: 50px;
+    top: 190px;
+    border: none;
+    background-color: rgb(0, 160, 100);
+    cursor: pointer;
+}
