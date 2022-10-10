@@ -1,5 +1,5 @@
 import './NoteList.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Note from './Note';
 import DeleteNote from './DeleteNote';
 import AddNote from './AddNote';
@@ -9,14 +9,17 @@ function NoteList() {
 
     const [id, setId] = useState(1);
 
-    var notes = JSON.parse(localStorage.getItem("notes") || "[]");
+    const [notes, setNotes] = useState([]);
 
-    //const [deleteNotes, setDeleteNotes] = useState([notes]);
-
-    //console.log(deleteNotes)
+    useEffect(() => {
+        const notes = JSON.parse(localStorage.getItem('notes'));
+        if (notes) {
+         setNotes(notes);
+         setId(notes[notes.length - 1].id+1);
+        }
+      }, []);
 
     const handleClick = (text) => {   
-        var notes = JSON.parse(localStorage.getItem("notes") || "[]");
         setId(id+1);
         var note = {
             id:id,
@@ -28,13 +31,10 @@ function NoteList() {
         localStorage.setItem("notes", JSON.stringify(notes));
     };
 
-    function handleDelete(id){
-        /*
-        console.log(id);
-        const newNotes = deleteNotes.filter((note) => note.id !== id);
-        console.log(newNotes);
+    function handleDelete(id){       
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
         localStorage.setItem("notes", JSON.stringify(newNotes));
-        setDeleteNotes(newNotes);*/
     };
 
     return (
