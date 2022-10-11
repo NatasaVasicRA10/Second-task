@@ -5,19 +5,29 @@ import DeleteNote from './DeleteNote';
 import AddNote from './AddNote';
 import { format } from "date-fns";
 
-function NoteList() {
+function NoteList({query}) {
 
     const [id, setId] = useState(1);
 
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes') || '[]'));
+
 
     useEffect(() => {
-        const notes = JSON.parse(localStorage.getItem('notes'));
-        if (notes) {
-         setNotes(notes);
-         setId(notes[notes.length - 1].id+1);
+        if (notes.length === 0) {
+            setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
+        }else if (notes.length !== 0 && notes && (query === null || query === "")) {
+            setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
+            setId(JSON.parse(localStorage.getItem('notes'))[JSON.parse(localStorage.getItem('notes')).length - 1]?.id+1);               
+        }else if(notes.length !== 0 && notes && query !== null){
+            const searchResult = notes.filter((note) => note.text.includes(query));
+            if(searchResult.length === 0){
+                setNotes([]);
+            }else{
+                setNotes(searchResult);
+            }           
         }
-      }, []);
+       
+    }, [query]); 
 
     const handleClick = (text) => {   
         setId(id+1);
@@ -31,10 +41,10 @@ function NoteList() {
         localStorage.setItem("notes", JSON.stringify(notes));
     };
 
-    function handleDelete(id){       
+    const handleDelete = (id) => {       
         const newNotes = notes.filter((note) => note.id !== id);
-        setNotes(newNotes);
         localStorage.setItem("notes", JSON.stringify(newNotes));
+        setNotes(newNotes);
     };
 
     return (

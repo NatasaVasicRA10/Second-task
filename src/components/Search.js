@@ -1,44 +1,14 @@
 import './Search.css';
-import React, { useState } from 'react';
+import React from 'react';
 
-function Search() {
-    const [query, setQuery] = useState("")
+function Search({ onChange }) {
 
-    const data = [
-        {
-            id: 1,
-            text: "Moja prva beleska"
-        },
-        {
-            id: 2,
-            text: "Druga beleska"
-        },
-        {
-            id: 3,
-            text: "tri"
-        }
-    ];
-  
-    return (
-        <div className="Container">
-        <button className="ButtonSearch"><i className="fa fa-search"></i></button>
-        <input className="Input" placeholder="Search for your notes" onChange={event => setQuery(event.target.value)} />
-        {
-          /*
-            data.filter(note => {
-                if (query === '') {
-                  return note;
-                } else if (note.text.toLowerCase().includes(query.toLowerCase())) {
-                  return note;
-                }
-              }).map((note) => (
-                <div key={note.id}>
-                  <p>{note.text}</p>
-                </div>
-              )) */
-        } 
-        </div>
-    );
+  return (
+    <div className="Container">
+      <button className="ButtonSearch"><i className="fa fa-search"></i></button>
+      <input className="Input" onChange={onChange} placeholder="Search for your notes"/>
+    </div>
+  );
 }
 
 export default Search;
