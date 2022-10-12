@@ -17,7 +17,8 @@ function DeleteNote(props) {
                         overflow: "hidden",
                         wordBreak: "break-all",
                         marginLeft: "5%",
-                        marginRight: "5%"
+                        marginRight: "5%",
+                        color: "black"
                     }}
                     >
                     {props.text}
@@ -25,11 +26,11 @@ function DeleteNote(props) {
             </Grid>
             <Grid item display="flex" justifyContent="flex-start" marginLeft="5%" xs={6}>
                 <FormLabel  
-                    sx={{
-                        maxWidth: 200, 
+                    sx={{ 
                         whiteSpace: "nowrap", 
                         textOverflow: "ellipsis", 
-                        overflow: "hidden"
+                        overflow: "hidden",
+                        color: "black"
                     }}
                     >
                     {props.date}

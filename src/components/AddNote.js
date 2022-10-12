@@ -18,6 +18,7 @@ function AddNote({handleClick}) {
                 minRows={9}
                 placeholder="Type to add a new note..."
                 className="TextArea"
+                fontFamily="'Roboto Medium', sans-serif"
                 maxLength={300} 
                 value={text} 
                 onChange={(e) => {setCount(300-e.target.value.length) || setText(e.target.value)}}
@@ -27,15 +28,13 @@ function AddNote({handleClick}) {
                 <FormLabel  
                     sx={{
                         maxWidth: 200, 
-                        whiteSpace: "nowrap", 
-                        textOverflow: "ellipsis", 
-                        overflow: "hidden"
+                        color: "black"
                     }}
                     >
                     {count} Remaining
                 </FormLabel>
             </Grid>
-            <Grid item display="flex" justifyContent="flex-end" marginLeft="5%" height="100%" xs={4}>
+            <Grid item display="flex" justifyContent="flex-end" mx={2} height="100%" xs={4}>
                 <button className="ButtonAdd" onClick={() => handleClick(text) || setText("") || setCount(300)}>Save</button>
             </Grid>
         </Grid>

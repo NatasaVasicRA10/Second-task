@@ -50,18 +50,16 @@ function NoteList({query}) {
     };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid container spacing={{sm:1, md:3, lg:3.5, xl:11}} rowSpacing={5} columns={{sm:1, md:3, lg:4, xl:4}}>
             {notes.map((note) => ( 
-                <Grid item xs={2} sm={4} md={4} key={note.id}>
+                <Grid item key={note.id}>
                     <Note><DeleteNote handleDelete={handleDelete} id={note.id} text={note.text} date={note.date}/></Note>
                 </Grid>
             ))}
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item>
                 <Note><AddNote handleClick={handleClick}/></Note>
             </Grid>
         </Grid>
-      </Box>
     );
 }
 

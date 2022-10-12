@@ -16,7 +16,7 @@ function App() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }} m={12}>
+    <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
     <Grid container spacing={4}>
         <Grid item xs={12}>
           <Header/>
