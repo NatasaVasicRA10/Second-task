@@ -1,18 +1,1 @@
-.App {
-  text-align: center;
-}
 
-.Header {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-}
-
-.Search {
-  position: absolute;
-  top: 23%; left: 0; right: 0; bottom: 0;
-}
-
-.AppNote {
-  position: absolute;
-  top: 45%; left: 0; right: 0; bottom: 0;
-}

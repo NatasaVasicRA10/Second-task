@@ -3,6 +3,8 @@ import React, { useState }from 'react';
 import Header from './components/Header';
 import Search from './components/Search';
 import NoteList from './components/NoteList';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 
 function App() {
@@ -14,11 +16,19 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="Header"><Header/></div>
-      <div className="Search"><Search onChange={searchChange}></Search></div>   
-      <div className="AppNote"><NoteList query={query}></NoteList></div>
-    </div>
+    <Box sx={{ flexGrow: 1 }} m={12}>
+    <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Header/>
+        </Grid>
+        <Grid item xs={12}>
+          <Search onChange={searchChange}></Search>
+        </Grid>
+        <Grid item xs={12}>
+          <NoteList query={query}></NoteList>
+        </Grid>
+    </Grid>
+    </Box>
   );
 }
 

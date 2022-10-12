@@ -4,6 +4,8 @@ import Note from './Note';
 import DeleteNote from './DeleteNote';
 import AddNote from './AddNote';
 import { format } from "date-fns";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 function NoteList({query}) {
 
@@ -48,15 +50,18 @@ function NoteList({query}) {
     };
 
     return (
-        <div className="ShowNote">
+        <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {notes.map((note) => ( 
-                <div key={note.id}>
+                <Grid item xs={2} sm={4} md={4} key={note.id}>
                     <Note><DeleteNote handleDelete={handleDelete} id={note.id} text={note.text} date={note.date}/></Note>
-                </div>
+                </Grid>
             ))}
-            <Note><AddNote handleClick={handleClick}/></Note>
-        </div>
-
+            <Grid item xs={2} sm={4} md={4}>
+                <Note><AddNote handleClick={handleClick}/></Note>
+            </Grid>
+        </Grid>
+      </Box>
     );
 }
 

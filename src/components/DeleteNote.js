@@ -1,13 +1,45 @@
 import './DeleteNote.css';
+import FormLabel from '@mui/material/FormLabel';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function DeleteNote(props) {
 
     return (
-        <div>
-            <label className="LabelText">{props.text}</label>
-            <label className="LabelDate">{props.date}</label>
-            <button className="ButtonDelete" onClick={() => props.handleDelete(props.id)}><i className="fa fa-trash fa-2x"></i></button>
-        </div>
+        <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+            <Grid item xs={12} height="200px" display="flex" justifyContent="flex-start">
+                <FormLabel  
+                    sx={{ 
+                        whiteSpace: "wrap", 
+                        textOverflow: "ellipsis", 
+                        overflow: "hidden",
+                        wordBreak: "break-all",
+                        marginLeft: "5%",
+                        marginRight: "5%"
+                    }}
+                    >
+                    {props.text}
+                </FormLabel>
+            </Grid>
+            <Grid item display="flex" justifyContent="flex-start" marginLeft="5%" xs={6}>
+                <FormLabel  
+                    sx={{
+                        maxWidth: 200, 
+                        whiteSpace: "nowrap", 
+                        textOverflow: "ellipsis", 
+                        overflow: "hidden"
+                    }}
+                    >
+                    {props.date}
+                </FormLabel>
+            </Grid>
+            <Grid item display="flex" justifyContent="flex-end" alignItems="center" xs={5}>
+                <button className="ButtonDelete" onClick={() => props.handleDelete(props.id)}><DeleteForeverIcon/></button>
+            </Grid>
+        </Grid>
+      </Box>
     );
 
 }
