@@ -10,7 +10,7 @@ const DeleteNote = (props) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-            <Grid item xs={12} height="200px" display="flex" justifyContent="flex-start">
+            <Grid item xs={12} height="240px" display="flex" justifyContent="flex-start">
                 <FormLabel  
                     sx={{ 
                         whiteSpace: "wrap", 
@@ -38,7 +38,7 @@ const DeleteNote = (props) => {
                 </FormLabel>
             </Grid>
             <Grid item display="flex" justifyContent="flex-end" alignItems="center" xs={5}>
-                <button className="ButtonDelete" onClick={() => props.handleDelete(props.id)}><DeleteForeverIcon/></button>
+                <button style ={{backgroundColor: props.noteColor, border: "none", cursor: "pointer"}} onClick={() => props.handleDelete(props.id)}><DeleteForeverIcon/></button>
             </Grid>
         </Grid>
       </Box>
