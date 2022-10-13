@@ -6,7 +6,8 @@ import Box from '@mui/material/Box';
 import FormLabel from '@mui/material/FormLabel';
 
 
-function AddNote({handleClick}) {
+const AddNote = ({handleClick}) => {
+    
     const [count, setCount] = useState(300);
     const [text, setText]= useState("");
 

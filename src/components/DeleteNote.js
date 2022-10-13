@@ -4,7 +4,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-function DeleteNote(props) {
+
+const DeleteNote = (props) => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>

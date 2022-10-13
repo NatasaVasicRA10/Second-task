@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-function NoteList({query}) {
+const NoteList = ({query}) => {
 
     const [id, setId] = useState(1);
 
@@ -21,7 +21,7 @@ function NoteList({query}) {
             setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
             setId(JSON.parse(localStorage.getItem('notes'))[JSON.parse(localStorage.getItem('notes')).length - 1]?.id+1);               
         }else if(notes.length !== 0 && notes && query !== null){
-            const searchResult = notes.filter((note) => note.text.includes(query));
+            const searchResult = notes.filter((note) => note.text.toLowerCase().includes(query.toLowerCase()));
             if(searchResult.length === 0){
                 setNotes([]);
             }else{
@@ -50,6 +50,7 @@ function NoteList({query}) {
     };
 
     return (
+        <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{sm:1, md:3, lg:3.5, xl:11}} rowSpacing={5} columns={{sm:1, md:3, lg:4, xl:4}}>
             {notes.map((note) => ( 
                 <Grid item key={note.id}>
@@ -60,6 +61,7 @@ function NoteList({query}) {
                 <Note><AddNote handleClick={handleClick}/></Note>
             </Grid>
         </Grid>
+        </Box>
     );
 }
 

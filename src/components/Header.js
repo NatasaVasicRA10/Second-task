@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-function Header() {
+
+const Header = () => {
     const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {

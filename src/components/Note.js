@@ -1,7 +1,7 @@
 import './Note.css';
 import React from 'react';
 
-function Note(props) {
+const Note = (props) => {
 
     return (
         <div className="Note">

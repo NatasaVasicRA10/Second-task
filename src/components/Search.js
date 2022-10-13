@@ -5,7 +5,8 @@ import Grid from '@mui/material/Grid';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 
-function Search({ onChange }) {
+
+const Search = ({ onChange }) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }} className="ItemSearch">
