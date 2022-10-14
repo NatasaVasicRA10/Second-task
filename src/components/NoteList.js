@@ -31,10 +31,12 @@ const NoteList = ({query}) => {
        
     }, [query]); 
 
-    const handleClick = (text,noteColor) => {   
+    const handleClick = (event,text,noteColor,title) => {   
+        event.preventDefault();
         setId(id+1);
         var note = {
             id:id,
+            title:title,
             text:text,
             date:format(new Date(), "MM/dd/yyyy"),
             noteColor:noteColor
@@ -55,7 +57,7 @@ const NoteList = ({query}) => {
         <Grid container spacing={{sm:1, md:3, lg:3.5, xl:11}} rowSpacing={5} columns={{sm:1, md:3, lg:4, xl:4}}>
             {notes.map((note) => ( 
                 <Grid item key={note.id}>
-                    <Note noteColor={note.noteColor}><DeleteNote handleDelete={handleDelete} id={note.id} text={note.text} date={note.date} noteColor={note.noteColor}/></Note>
+                    <Note noteColor={note.noteColor}><DeleteNote handleDelete={handleDelete} id={note.id} title={note.title} text={note.text} date={note.date} noteColor={note.noteColor}/></Note>
                 </Grid>
             ))}
             <Grid item>
