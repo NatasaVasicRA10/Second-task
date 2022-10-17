@@ -10,22 +10,24 @@ import Box from '@mui/material/Box';
 function App() {
 
   const [query, setQuery] = useState(null);
+  const [sortType, setSortType] = useState("");
 
   const searchChange = (e) => {
     setQuery(e.target.value);
   };
 
+
   return (
     <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
     <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Header/>
+          <Header sortType={sortType} setSortType={setSortType}/>
         </Grid>
         <Grid item xs={12}>
           <Search onChange={searchChange}></Search>
         </Grid>
         <Grid item xs={12}>
-          <NoteList query={query}></NoteList>
+          <NoteList query={query} sortType={sortType}></NoteList>
         </Grid>
     </Grid>
     </Box>

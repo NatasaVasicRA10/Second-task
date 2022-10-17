@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-const NoteList = ({query}) => {
+const NoteList = ({query,sortType}) => {
 
     const [id, setId] = useState(1);
 
@@ -21,15 +21,31 @@ const NoteList = ({query}) => {
             setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
             setId(JSON.parse(localStorage.getItem('notes'))[JSON.parse(localStorage.getItem('notes')).length - 1]?.id+1);               
         }else if(notes.length !== 0 && notes && query !== null){
-            const searchResult = notes.filter((note) => note.text.toLowerCase().includes(query.toLowerCase()));
+            const searchResult = notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) || note.text.toLowerCase().includes(query.toLowerCase()));
             if(searchResult.length === 0){
                 setNotes([]);
             }else{
-                setNotes(searchResult);
+                setNotes(searchResult);              
             }           
         }
+
+        if (sortType === "ascending") {
+            setNotes(
+                notes.slice().sort((a, b) => {
+                return new Date(a.date) - new Date(b.date);
+                })
+            );
+        }
+        
+        if (sortType === "descending") {
+            setNotes(
+                notes.slice().sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+                })
+            );
+        }
        
-    }, [query]); 
+    }, [query,sortType]); 
 
     const handleClick = (event,text,noteColor,title) => {   
         event.preventDefault();
