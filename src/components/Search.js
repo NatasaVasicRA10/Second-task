@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 
 
-const Search = ({ onChange }) => {
+const Search = ({ handleSearch }) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }} className="ItemSearch">
@@ -15,7 +15,7 @@ const Search = ({ onChange }) => {
               <SearchIcon/>
             </Grid>
             <Grid item display="flex" justifyContent="flex-start" mx={1} xs={11}>
-              <TextField style ={{width: "100%"}} InputProps={{ disableUnderline: true }} onChange={onChange} placeholder="Search for your notes" variant="standard" />
+              <TextField style ={{width: "100%"}} InputProps={{ disableUnderline: true }} onChange={handleSearch} placeholder="Search for your notes" variant="standard" />
             </Grid>
       </Grid>
     </Box>

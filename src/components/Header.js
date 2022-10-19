@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-const Header = ({sortType,setSortType}) => {
+const Header = ({sortType,handleSort}) => {
     const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {
@@ -24,18 +24,13 @@ const Header = ({sortType,setSortType}) => {
       document.body.className = theme;
     }, [theme]);
 
-    const sortChange = (event) => {
-      setSortType(event.target.value);
-    };
-
     const NewIcon = () => {
       return sortType === "descending" ? <FaSortAmountDown style={{ pointerEvents: "none" }}/> : < FaSortAmountUp style={{ pointerEvents: "none" }}/>;
     };
 
     const sortItems = [
-      {id: 1, title: 'None', content: ''},
-      {id: 2, title: 'ASCENDING', content: 'ascending'},
-      {id: 3, title: 'DESCENDING', content: 'descending'}
+      {id: 1, title: 'ASCENDING', content: 'ascending'},
+      {id: 2, title: 'DESCENDING', content: 'descending'}
     ];
 
     return (
@@ -62,7 +57,7 @@ const Header = ({sortType,setSortType}) => {
                 <Select
                   displayEmpty
                   value={sortType}
-                  onChange={(event) => sortChange(event)}
+                  onChange={handleSort}
                   disableUnderline  
                   IconComponent = {NewIcon} 
                   sx={{ 

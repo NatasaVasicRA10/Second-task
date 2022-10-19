@@ -8,7 +8,7 @@ import { CirclePicker } from 'react-color';
 import TextField from '@mui/material/TextField';
 
 
-const AddNote = ({handleClick}) => {
+const AddNote = ({handleAdd}) => {
     
     const [count, setCount] = useState(300);
     const [text, setText]= useState("");
@@ -19,7 +19,7 @@ const AddNote = ({handleClick}) => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-        <form onSubmit={(event) => handleClick(event,text, noteColor,title) || setTitle("") || setText("") || setCount(300)}>
+        <form onSubmit={(event) => handleAdd(event,text, noteColor,title) || setTitle("") || setText("") || setCount(300)}>
             <Grid container spacing={2}>
                 <Grid item xs={12} display="flex" justifyContent="center">
                     <TextField 

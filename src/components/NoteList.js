@@ -1,72 +1,13 @@
 import './NoteList.css';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Note from './Note';
 import DeleteNote from './DeleteNote';
 import AddNote from './AddNote';
-import { format } from "date-fns";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-const NoteList = ({query,sortType}) => {
+const NoteList = ({notes, handleAdd, handleDelete}) => {
 
-    const [id, setId] = useState(1);
-
-    const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes') || '[]'));
-
-
-    useEffect(() => {
-        if (notes.length === 0) {
-            setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
-        }else if (notes.length !== 0 && notes && (query === null || query === "")) {
-            setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
-            setId(JSON.parse(localStorage.getItem('notes'))[JSON.parse(localStorage.getItem('notes')).length - 1]?.id+1);               
-        }else if(notes.length !== 0 && notes && query !== null){
-            const searchResult = notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) || note.text.toLowerCase().includes(query.toLowerCase()));
-            if(searchResult.length === 0){
-                setNotes([]);
-            }else{
-                setNotes(searchResult);              
-            }           
-        }
-
-        if (sortType === "ascending") {
-            setNotes(
-                notes.slice().sort((a, b) => {
-                return new Date(a.date) - new Date(b.date);
-                })
-            );
-        }
-        
-        if (sortType === "descending") {
-            setNotes(
-                notes.slice().sort((a, b) => {
-                return new Date(b.date) - new Date(a.date);
-                })
-            );
-        }
-       
-    }, [query,sortType]); 
-
-    const handleClick = (event,text,noteColor,title) => {   
-        event.preventDefault();
-        setId(id+1);
-        var note = {
-            id:id,
-            title:title,
-            text:text,
-            date:format(new Date(), "MM/dd/yyyy"),
-            noteColor:noteColor
-        }
-        notes.push(note);
-
-        localStorage.setItem("notes", JSON.stringify(notes));
-    };
-
-    const handleDelete = (id) => {       
-        const newNotes = notes.filter((note) => note.id !== id);
-        localStorage.setItem("notes", JSON.stringify(newNotes));
-        setNotes(newNotes);
-    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -77,7 +18,7 @@ const NoteList = ({query,sortType}) => {
                 </Grid>
             ))}
             <Grid item>
-                <Note noteColor={"#00A064"}><AddNote handleClick={handleClick}/></Note>
+                <Note noteColor={"#00A064"}><AddNote handleAdd={handleAdd}/></Note>
             </Grid>
         </Grid>
         </Box>
