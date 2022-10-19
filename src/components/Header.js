@@ -1,5 +1,5 @@
 import './Header.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { FaSortAmountUp } from 'react-icons/fa';
@@ -9,20 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-const Header = ({sortType,handleSort}) => {
-    const [theme, setTheme] = useState('light');
-
-    const toggleTheme = () => {
-      if (theme === 'light') {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-    };
-
-    useEffect(() => {
-      document.body.className = theme;
-    }, [theme]);
+const Header = ({toggleTheme,sortType,handleSort}) => {
 
     const NewIcon = () => {
       return sortType === "descending" ? <FaSortAmountDown style={{ pointerEvents: "none" }}/> : < FaSortAmountUp style={{ pointerEvents: "none" }}/>;
@@ -44,7 +31,7 @@ const Header = ({sortType,handleSort}) => {
             <Grid item display="flex" justifyContent="flex-end" alignItems="center" xs={3}>
               <button className="ButtonToggle" onClick={toggleTheme}>Toggle Mode</button>
             </Grid>
-            <Grid item display="flex" justifyContent="flex-end" alignItems="center" xs={12}>
+            <Grid item display="flex" justifyContent="flex-end" alignItems="center" marginTop="1%" xs={12}>
               <FormControl sx={{ 
                                 backgroundColor: "#E7E7E7",
                                 border: "4px solid #008055",
@@ -52,7 +39,7 @@ const Header = ({sortType,handleSort}) => {
                                 borderRadius: "20px",
                                 width: "15%",
                                 cursor: "pointer",
-                                height: "75%"
+                                height: "75%",
                               }} variant="standard">               
                 <Select
                   displayEmpty

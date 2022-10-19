@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
-const DeleteNote = (props) => {
+const DeleteNote = ({handleDelete, id, title, text, date, noteColor}) => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -23,7 +23,7 @@ const DeleteNote = (props) => {
                         fontSize: "24px"
                     }}
                     >
-                    {props.title}
+                    {title}
                 </FormLabel>
             </Grid>
             <Grid item xs={12} height="240px" display="flex" justifyContent="flex-start">
@@ -38,7 +38,7 @@ const DeleteNote = (props) => {
                         color: "black"
                     }}
                     >
-                    {props.text}
+                    {text}
                 </FormLabel>
             </Grid>
             <Grid item display="flex" justifyContent="flex-start" marginLeft="5%" xs={6}>
@@ -50,11 +50,11 @@ const DeleteNote = (props) => {
                         color: "black"
                     }}
                     >
-                    {props.date}
+                    {date}
                 </FormLabel>
             </Grid>
             <Grid item display="flex" justifyContent="flex-end" alignItems="center" xs={5}>
-                <button style ={{backgroundColor: props.noteColor, border: "none", cursor: "pointer"}} onClick={() => props.handleDelete(props.id)}><DeleteForeverIcon/></button>
+                <button style ={{backgroundColor: noteColor, border: "none", cursor: "pointer"}} onClick={() => handleDelete(id)}><DeleteForeverIcon/></button>
             </Grid>
         </Grid>
       </Box>

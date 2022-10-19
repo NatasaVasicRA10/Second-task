@@ -11,12 +11,21 @@ import { format } from "date-fns";
 function App() {
 
   const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || []);
+  const [theme, setTheme] = useState('light');
   const [query, setQuery] = useState("");
   const [sortType, setSortType] = useState("ascending");
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
 
   const handleAdd = (event,text,noteColor,title) => {   
     event.preventDefault();
@@ -47,28 +56,29 @@ function App() {
     setSortType(e.target.value);
   };
 
-
   return (
-    <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
-    <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <Header sortType={sortType} handleSort={handleSort}/>
+    <div  style={theme==="light" ? {backgroundColor: "#fff",color: "#333"} : {backgroundColor: "#333",color: "#fff"}}>
+      <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Header toggleTheme={toggleTheme} sortType={sortType} handleSort={handleSort}/>
+            </Grid>
+            <Grid item xs={12}>
+              <Search handleSearch={handleSearch}></Search>
+            </Grid>
+            <Grid item xs={12}>
+              <NoteList 
+                notes={query!=="" ? notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) 
+                  || note.text.toLowerCase().includes(query.toLowerCase())) : 
+                  sortType === "ascending" ?  notes : 
+                  notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date); })}
+                handleAdd={handleAdd} 
+                handleDelete={handleDelete}>
+              </NoteList>
+            </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Search handleSearch={handleSearch}></Search>
-        </Grid>
-        <Grid item xs={12}>
-          <NoteList 
-            notes={query!=="" ? notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) 
-              || note.text.toLowerCase().includes(query.toLowerCase())) : 
-              sortType === "ascending" ?  notes : 
-              notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date); })}
-            handleAdd={handleAdd} 
-            handleDelete={handleDelete}>
-          </NoteList>
-        </Grid>
-    </Grid>
-    </Box>
+      </Box>
+    </div>
   );
 }
 

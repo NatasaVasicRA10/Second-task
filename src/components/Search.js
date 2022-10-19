@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 const Search = ({ handleSearch }) => {
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }} className="ItemSearch">
+    <Box sx={{ display: "flex", alignItems: "center" , marginBottom: "2%"}} className="ItemSearch">
       <Grid container>
             <Grid item display="flex" justifyContent="center" alignItems="center">
               <SearchIcon/>
