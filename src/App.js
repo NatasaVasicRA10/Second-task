@@ -55,6 +55,7 @@ function App() {
   const handleSort = (e) => {
     setSortType(e.target.value);
   };
+  
 
   return (
     <div  style={theme==="light" ? {backgroundColor: "#fff",color: "#333"} : {backgroundColor: "#333",color: "#fff"}}>

@@ -1,8 +1,6 @@
-import './AddNote.css';
 import React, {useState} from 'react';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import FormLabel from '@mui/material/FormLabel';
 import { CirclePicker } from 'react-color';
 import TextField from '@mui/material/TextField';
@@ -32,13 +30,12 @@ const AddNote = ({handleAdd, handleColorChange, noteLabelColor,setNoteLabelColor
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
         <form onSubmit={(event) => handleAdd(event,text,noteColor,title) || setTitle("") || setText("") || setCount(300)}>
             <Grid container spacing={2}>
-                <Grid item xs={12} display="flex" justifyContent="center">
+                <Grid item className="AddNoteItem" xs={12}>
                     <TextField 
                         placeholder="Type to add a title..." 
-                        className="TextField"
+                        className="AddNoteTextField"
                         value={title}
                         required={true}
                         variant="standard"
@@ -46,38 +43,32 @@ const AddNote = ({handleAdd, handleColorChange, noteLabelColor,setNoteLabelColor
                         onChange={(e) => {setTitle(e.target.value)}}
                         style ={{backgroundColor: noteLabelColor}}/>
                 </Grid>
-                <Grid item xs={12} height="200px" display="flex" justifyContent="center">
+                <Grid item className="AddNoteItem" xs={12}>
                     <TextareaAutosize
                         minRows={10}
                         placeholder="Type to add a new note..."
-                        className="TextArea"
+                        className="AddNoteTextArea"
                         maxLength={300} 
                         required={true}
                         value={text} 
                         onChange={(e) => {setCount(300-e.target.value.length) || setText(e.target.value)}}
                         style ={{backgroundColor: noteLabelColor}}/>
                 </Grid>
-                <Grid item xs={12} display="flex" justifyContent="flex-start" marginLeft="6%" marginTop="1%">
+                <Grid item className="AddNoteCircleColor" xs={12}>
                     <CirclePicker colors={colorList} onChange={targetColor => 
                         {setNoteColor(targetColor.hex); handleColorChange(targetColor.hex); 
                         handleChangleLabelColor(targetColor.hex)}}/>
                 </Grid>
-                <Grid item display="flex" justifyContent="flex-start" marginLeft="5%" xs={6}>
-                    <FormLabel  
-                        sx={{
-                            maxWidth: 200, 
-                            color: "black"
-                        }}
-                        >
+                <Grid item className="AddNoteCircleColor" xs={6}>
+                    <FormLabel className="AddNoteCount">
                         {count} Remaining
                     </FormLabel>
                 </Grid>
-                <Grid item display="flex" justifyContent="flex-end" mx={2} height="100%" xs={4}>
-                    <button className="ButtonAdd">Save</button>
+                <Grid item className="AddButtonPosition" mx={2} xs={4}>
+                    <button className="AddButton">Save</button>
                 </Grid>
             </Grid>
         </form>
-        </Box>
     );
 }
 
