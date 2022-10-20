@@ -1,36 +1,52 @@
-import './Header.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { FaSortAmountUp } from 'react-icons/fa';
+import { FaSortAmountDown } from 'react-icons/fa';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
-const Header = () => {
-    const [theme, setTheme] = useState('light');
+const Header = ({toggleTheme,sortType,handleSort}) => {
 
-    const toggleTheme = () => {
-      if (theme === 'light') {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
+    const NewIcon = () => {
+      return sortType === "descending" ? <FaSortAmountDown/> : < FaSortAmountUp/>;
     };
-    useEffect(() => {
-      document.body.className = theme;
-    }, [theme]);
 
-    return (
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={4}>
-            <Grid item display="flex" justify-content="flex-start" xs={4}>
-              <h1><span className="Title">React</span> Notes</h1>
-            </Grid>
-            <Grid item xs={5}>
-            </Grid>
-            <Grid item display="flex" justifyContent="flex-end" alignItems="center" xs={3}>
-              <button className="ButtonToggle" onClick={toggleTheme}>Toggle Mode</button>
-            </Grid>
-        </Grid>
-      </Box>
+    const sortItems = [
+      {id: 1, title: 'ASCENDING', content: 'ascending'},
+      {id: 2, title: 'DESCENDING', content: 'descending'}
+    ];
+
+    return (     
+      <Grid container spacing={1}>
+          <Grid item xs={4}>
+            <h1><span className="Title">React</span> Notes</h1>
+          </Grid>
+          <Grid item xs={5}>
+          </Grid>
+          <Grid item className="ButtonItem" xs={3}>
+            <button className="ButtonToggle" onClick={toggleTheme}>Toggle Mode</button>
+          </Grid>
+          <Grid item className="SelectItem" xs={12}>
+            <FormControl className="FormControl" variant="standard">               
+              <Select
+                displayEmpty
+                value={sortType}
+                onChange={handleSort}
+                disableUnderline  
+                IconComponent = {NewIcon} 
+                className="Select"                      
+              >
+                {sortItems.map((sortItem) => ( 
+                  <MenuItem key={sortItem.id} value={sortItem.content}>
+                    {sortItem.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+      </Grid>  
     );
 }
 

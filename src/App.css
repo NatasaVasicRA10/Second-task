@@ -1,1 +1,170 @@
+.SearchBox {
+    background-color: rgb(231, 231, 231);
+    border: 4px solid rgb(0, 128, 85);
+    border-radius: 20px;
+    font-size: 16px;
+    height: 60px;
+    padding-left: 2%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.SearchIcon {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.SearchField {
+    width: 100%;
+}
+
+.Note {
+    width: 350px;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.Title {
+    color: rgb(0, 128, 85);
+}
+
+.ButtonToggle {
+    background-color: rgb(231, 231, 231);
+    border: 4px solid rgb(0, 128, 85);
+    text-align: center;
+    font-size: 16px;
+    border-radius: 20px;
+    width: auto;
+    cursor: pointer;
+    height: 90%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.ButtonItem {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.SelectItem {
+    display: flex; 
+    justify-content: flex-end;
+    align-items: center; 
+}
+
+.FormControl {
+    background-color: #E7E7E7;
+    border: 4px solid #008055 !important;
+    font-size: 16px;
+    border-radius: 20px;
+    width: 15%;
+    cursor: pointer;
+    height: 75%;
+}
+
+.Select {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.NoteTitle {
+    white-space: wrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black !important; 
+    font-size: 24px !important;
+}
+
+.NoteHeight {
+    height: 240px;
+}
+
+.NoteText {
+    white-space: wrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black !important;
+}
+
+.NoteDate {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black !important;
+}
+
+.DatePosition {
+    margin-left: 5% !important;
+    margin-top: 2% !important;
+    margin-bottom: 2% !important;
+}
+
+.DeleteButtonPosition {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.DeleteButton { 
+    border: none !important; 
+    cursor: pointer;
+    color: black !important;
+}
+
+.AddNoteItem {
+    display: flex; 
+    justify-content: center;
+}
+
+.AddNoteTextField {
+    width: 300px;
+    font-size: 16px;
+}
+
+.AddNoteTextArea {
+    width: 300px;
+    height: 280px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.AddNoteCircleColor {
+    margin-left: 6% !important;
+}
+
+.AddNoteCount {
+    max-width: 200;
+    color: black !important;
+}
+
+.circle-picker span div span div {
+    border: 1px solid gray;
+}
+
+.AddButton {
+    background-color: rgb(231, 231, 231);
+    border: 4px solid rgb(0, 128, 85);
+    text-align: center;
+    font-size: 16px;
+    border-radius: 20px;
+    width: auto;
+    cursor: pointer;
+    height: 100%;
+    width: 70%;
+    margin-left: 6% !important;
+}
+
+.AddButtonPosition {
+    display: flex;
+    justify-content: flex-end;
+}
 

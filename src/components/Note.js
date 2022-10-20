@@ -1,4 +1,3 @@
-import './Note.css';
 import React from 'react';
 
 const Note = (props) => {
