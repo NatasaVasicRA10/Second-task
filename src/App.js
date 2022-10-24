@@ -64,11 +64,38 @@ function App() {
   };
   
   const handleNotes = () => {
-    const newNotes = query!=="" ? notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) 
-    || note.text.toLowerCase().includes(query.toLowerCase())) 
-    : sortType === "ascending" ? (startDate !== null && endDate !== null ? notes.slice().sort((a, b) => {return new Date(a.date) - new Date(b.date)}).filter((note) => (new Date(note.date) >= startDate && new Date(note.date) <= endDate)) : notes.slice().sort((a, b) => {return new Date(a.date) - new Date(b.date)}))
-    : sortType === "descending" ? (startDate !== null && endDate !== null ? notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date)}).filter((note) => (new Date(note.date) >= startDate && new Date(note.date) <= endDate)) : notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date)}))
+    const newNotes = query !== "" ? search()
+    : sortType === "ascending" ? sortingAsc()
+    : sortType === "descending" ? sortingDes()
     : notes;
+    return newNotes;
+  }
+
+  const search = () => {
+    const newNotes = notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) 
+    || note.text.toLowerCase().includes(query.toLowerCase()))
+    return newNotes;
+  }
+
+  const sortingAsc = () => {
+    const newNotes = startDate !== null && endDate !== null ? 
+    ascDate().filter((note) => (new Date(note.date) >= startDate && new Date(note.date) <= endDate)) : ascDate()
+    return newNotes;
+  } 
+
+  const sortingDes = () => { 
+    const newNotes = startDate !== null && endDate !== null ? 
+    desDate().filter((note) => (new Date(note.date) >= startDate && new Date(note.date) <= endDate)) : desDate()
+    return newNotes;
+  }
+
+  const ascDate = () => {
+    const newNotes = notes.slice().sort((a, b) => {return new Date(a.date) - new Date(b.date)});
+    return newNotes;
+  }
+
+  const desDate = () => {
+    const newNotes = notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date)});
     return newNotes;
   }
 
