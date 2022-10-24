@@ -17,6 +17,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [sortType, setSortType] = useState("ascending");
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -64,7 +66,46 @@ function App() {
     props.setSubmitting(false);
     navigate("home")
 }
+  const handleResetNotes = () => {
+    setStartDate(null);
+    setEndDate(null);
+  };
   
+  const handleNotes = () => {
+    const newNotes = query !== "" ? search()
+    : sortType === "ascending" ? sortingAsc()
+    : sortType === "descending" ? sortingDes()
+    : notes;
+    return newNotes;
+  }
+
+  const search = () => {
+    const newNotes = notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) 
+    || note.text.toLowerCase().includes(query.toLowerCase()))
+    return newNotes;
+  }
+
+  const sortingAsc = () => {
+    const newNotes = startDate !== null && endDate !== null ? 
+    ascDate().filter((note) => (new Date(note.date) >= startDate && new Date(note.date) <= endDate)) : ascDate()
+    return newNotes;
+  } 
+
+  const sortingDes = () => { 
+    const newNotes = startDate !== null && endDate !== null ? 
+    desDate().filter((note) => (new Date(note.date) >= startDate && new Date(note.date) <= endDate)) : desDate()
+    return newNotes;
+  }
+
+  const ascDate = () => {
+    const newNotes = notes.slice().sort((a, b) => {return new Date(a.date) - new Date(b.date)});
+    return newNotes;
+  }
+
+  const desDate = () => {
+    const newNotes = notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date)});
+    return newNotes;
+  }
 
   return (
     <Routes>
@@ -74,17 +115,23 @@ function App() {
           <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Header toggleTheme={toggleTheme} sortType={sortType} handleSort={handleSort}/>
+                  <Header 
+                    toggleTheme={toggleTheme} 
+                    sortType={sortType} 
+                    handleSort={handleSort} 
+                    startDate={startDate} 
+                    setStartDate={setStartDate}
+                    endDate={endDate}
+                    setEndDate={setEndDate}
+                    handleResetNotes={handleResetNotes}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Search handleSearch={handleSearch}></Search>
                 </Grid>
                 <Grid item xs={12}>
                   <NoteList 
-                    notes={query!=="" ? notes.filter((note) => note.title.toLowerCase().includes(query.toLowerCase()) 
-                      || note.text.toLowerCase().includes(query.toLowerCase())) : 
-                      sortType === "ascending" ?  notes : 
-                      notes.slice().sort((a, b) => {return new Date(b.date) - new Date(a.date); })}
+                    notes={handleNotes()}
                     handleAdd={handleAdd} 
                     handleDelete={handleDelete}>
                   </NoteList>
