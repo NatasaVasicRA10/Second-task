@@ -6,8 +6,6 @@ import NoteList from './components/NoteList';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { format } from "date-fns";
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import SignUp from './components/SignUp';
 
 
 function App() {
@@ -16,7 +14,6 @@ function App() {
   const [theme, setTheme] = useState('light');
   const [query, setQuery] = useState("");
   const [sortType, setSortType] = useState("ascending");
-  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -61,11 +58,6 @@ function App() {
     setSortType(e.target.value);
   };
 
-  const handleSignUp = (values, props) => {
-    props.resetForm();
-    props.setSubmitting(false);
-    navigate("home")
-}
   const handleResetNotes = () => {
     setStartDate(null);
     setEndDate(null);
@@ -108,40 +100,34 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<SignUp handleSignUp={handleSignUp} />}></Route>
-      <Route path="home" element={ 
-        <div  style={theme==="light" ? {backgroundColor: "#fff",color: "#333"} : {backgroundColor: "#333",color: "#fff"}}>
-          <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Header 
-                    toggleTheme={toggleTheme} 
-                    sortType={sortType} 
-                    handleSort={handleSort} 
-                    startDate={startDate} 
-                    setStartDate={setStartDate}
-                    endDate={endDate}
-                    setEndDate={setEndDate}
-                    handleResetNotes={handleResetNotes}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Search handleSearch={handleSearch}></Search>
-                </Grid>
-                <Grid item xs={12}>
-                  <NoteList 
-                    notes={handleNotes()}
-                    handleAdd={handleAdd} 
-                    handleDelete={handleDelete}>
-                  </NoteList>
-                </Grid>
+    <div  style={theme==="light" ? {backgroundColor: "#fff",color: "#333"} : {backgroundColor: "#333",color: "#fff"}}>
+      <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
+        <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Header 
+                toggleTheme={toggleTheme} 
+                sortType={sortType} 
+                handleSort={handleSort} 
+                startDate={startDate} 
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                handleResetNotes={handleResetNotes}
+              />
             </Grid>
-          </Box>
-        </div>
-        }>
-      </Route>
-    </Routes>
+            <Grid item xs={12}>
+              <Search handleSearch={handleSearch}></Search>
+            </Grid>
+            <Grid item xs={12}>
+              <NoteList 
+                notes={handleNotes()}
+                handleAdd={handleAdd} 
+                handleDelete={handleDelete}>
+              </NoteList>
+            </Grid>
+        </Grid>
+      </Box>
+    </div>
   );
 }
 

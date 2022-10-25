@@ -6,8 +6,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { validationSchema }  from "../schema";
+import { useNavigate } from 'react-router-dom';
 
-const SignUp = ({ handleSignUp }) => {
+const SignUp = () => {
+
+    const navigate = useNavigate();
 
     const initialValues = {
         name: "",
@@ -15,6 +18,12 @@ const SignUp = ({ handleSignUp }) => {
         password: "", 
         confirmPassword: "", 
         email: ""
+    }
+
+    const handleSignUp = (values, props) => {
+        props.resetForm();
+        props.setSubmitting(false);
+        navigate("home")
     }
 
     return (
@@ -54,7 +63,7 @@ const SignUp = ({ handleSignUp }) => {
                                 </div>
                                                        
                             <Grid item align='center'>
-                                <Button type='submit' variant='contained' disabled={props.isSubmitting}
+                                <Button type='submit' variant='contained' disabled={props.isSubmitting || !props.isValid || !props.dirty}
                                 color='primary'>Sign up</Button>
                             </Grid>
                         </Form>
