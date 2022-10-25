@@ -11,8 +11,8 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route path="home" element={<App />} />
+        <Route path='/' element={<SignUp />} />
+        <Route path='home' element={<App />} />
       </Routes>
     </Router>
   </React.StrictMode>
