@@ -16,6 +16,7 @@
     "formik": "^2.2.9",
     "formik-mui": "^5.0.0-alpha.0",
     "mui-formik": "^0.1.1",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
@@ -29,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js",
+    "lint-fix": "eslint src/**/*.js --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +51,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-plugin-react": "^7.31.10"
   }
 }
