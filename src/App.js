@@ -63,11 +63,9 @@ const App = () => {
   };
 
   const handleNotes = () => {
-    // eslint-disable-next-line no-negated-condition
-    const newNotes = query !== '' ? search()
-      : sortType === 'ascending' ? sortingAsc()
-        : sortType === 'descending' ? sortingDes()
-          : notes;
+    const newNotes = query === '' ? sortType === 'ascending' ? sortingAsc()
+      : sortType === 'descending' ? sortingDes()
+        : notes : search();
     return newNotes;
   };
 

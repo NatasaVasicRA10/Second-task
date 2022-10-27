@@ -34,7 +34,7 @@ export default DeleteNote;
 
 DeleteNote.propTypes = {
   handleDelete: PropTypes.func,
-  id: PropTypes.string,
+  id: PropTypes.number,
   title: PropTypes.string,
   text: PropTypes.string,
   date: PropTypes.any,
