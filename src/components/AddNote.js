@@ -6,6 +6,14 @@ import { CirclePicker } from 'react-color';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 
+export const labelColor = {
+  orange: '#f5cf6e',
+  pink: '#faa28e',
+  purple: '#dfa2f5',
+  blue: '#74eef7',
+  yellow: '#e6f5ab'
+};
+
 const AddNote = ({handleAdd, handleColorChange, noteLabelColor, setNoteLabelColor}) => {
 
   const [ count, setCount ] = useState(300);
@@ -16,23 +24,25 @@ const AddNote = ({handleAdd, handleColorChange, noteLabelColor, setNoteLabelColo
   const colorList = [ '#d4b055', '#ed8c77', '#c187d6', '#39d0db', '#e2fa84' ];
 
   const handleChangleLabelColor = (color) => {
+    let chosenColor = '';
     switch (color) {
       case '#d4b055':
-        setNoteLabelColor('#f5cf6e');
+        chosenColor = labelColor.orange;
         break;
       case '#ed8c77':
-        setNoteLabelColor('#faa28e');
+        chosenColor = labelColor.pink;
         break;
       case '#c187d6':
-        setNoteLabelColor('#dfa2f5');
+        chosenColor = labelColor.purple;
         break;
       case '#39d0db':
-        setNoteLabelColor('#74eef7');
+        chosenColor = labelColor.blue;
         break;
       default:
-        setNoteLabelColor('#e6f5ab');
+        chosenColor = labelColor.yellow;
         break;
     }
+    setNoteLabelColor(chosenColor);
   };
 
   return (
