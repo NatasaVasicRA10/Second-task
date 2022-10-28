@@ -8,9 +8,8 @@ import TextField from '@mui/material/TextField';
 import { validationSchema } from '../schema';
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../firebase';
-import { collection, addDoc} from 'firebase/firestore';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const SignUp = () => {
 
@@ -26,18 +25,17 @@ const SignUp = () => {
 
   const handleSignUp = async (values, props) => {
     try {
-      const res = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         values.email,
         values.password
       );
-      const user = res.user;
-      await addDoc(collection(db, 'users'), {
-        uid: user.uid,
-        name: values.name,
-        lastName: values.lastName,
-        email: values.email
-      });
+      await updateProfile(
+        auth.currentUser,
+        {displayName: values.name + ' ' + values.lastName})
+        .catch(
+          () => alert('Something went wrong.')
+        );
     } catch (error) {
       alert('Something went wrong.');
     }
