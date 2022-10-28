@@ -16,16 +16,22 @@ const AddNote = ({handleAdd, handleColorChange, noteLabelColor, setNoteLabelColo
   const colorList = [ '#d4b055', '#ed8c77', '#c187d6', '#39d0db', '#e2fa84' ];
 
   const handleChangleLabelColor = (color) => {
-    if (color==='#d4b055') {
-      setNoteLabelColor('#f5cf6e');
-    } else if (color==='#ed8c77') {
-      setNoteLabelColor('#faa28e');
-    } else if (color==='#c187d6') {
-      setNoteLabelColor('#dfa2f5');
-    } else if (color==='#39d0db') {
-      setNoteLabelColor('#74eef7');
-    } else if (color==='#e2fa84') {
-      setNoteLabelColor('#e6f5ab');
+    switch (color) {
+      case '#d4b055':
+        setNoteLabelColor('#f5cf6e');
+        break;
+      case '#ed8c77':
+        setNoteLabelColor('#faa28e');
+        break;
+      case '#c187d6':
+        setNoteLabelColor('#dfa2f5');
+        break;
+      case '#39d0db':
+        setNoteLabelColor('#74eef7');
+        break;
+      default:
+        setNoteLabelColor('#e6f5ab');
+        break;
     }
   };
 

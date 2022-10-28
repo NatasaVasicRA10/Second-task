@@ -14,7 +14,12 @@ const Search = ({handleSearch}) => {
           <SearchIcon/>
         </Grid>
         <Grid item mx={1} xs={11}>
-          <TextField className='SearchField' InputProps={{ disableUnderline: true }} onChange={handleSearch} placeholder='Search for your notes' variant='standard' />
+          <TextField
+            className='SearchField'
+            InputProps={{ disableUnderline: true }}
+            onChange={handleSearch}
+            placeholder='Search for your notes'
+            variant='standard' />
         </Grid>
       </Grid>
     </Box>
