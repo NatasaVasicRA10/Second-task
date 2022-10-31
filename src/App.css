@@ -39,8 +39,19 @@
     width: auto;
     cursor: pointer;
     height: 90%;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.ButtonSignOut {
+    height: 35px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.ButtonItemSignOut {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .ButtonItem {

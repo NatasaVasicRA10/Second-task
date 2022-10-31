@@ -9,8 +9,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import PropTypes from 'prop-types';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
+
+  const navigate = useNavigate();
 
   const NewIcon = () => {
     return sortType === 'descending' ? <FaSortAmountDown/> : < FaSortAmountUp/>;
@@ -21,8 +26,16 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
     {id: 2, title: 'DESCENDING', content: 'descending'}
   ];
 
+  const logout = async () => {
+    await signOut(auth);
+    navigate('/');
+  };
+
   return (
     <Grid container spacing={1}>
+      <Grid item className='ButtonItemSignOut' xs={12}>
+        <button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</button>
+      </Grid>
       <Grid item xs={4}>
         <h1><span className='Title'>React</span> Notes</h1>
       </Grid>

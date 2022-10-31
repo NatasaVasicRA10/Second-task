@@ -6,8 +6,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { validationSchema } from '../schema';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const SignUp = () => {
 
@@ -21,10 +23,25 @@ const SignUp = () => {
     email: ''
   };
 
-  const handleSignUp = (values, props) => {
+  const handleSignUp = async (values, props) => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      await updateProfile(
+        auth.currentUser,
+        {displayName: values.name + ' ' + values.lastName})
+        .catch(
+          () => alert('Something went wrong.')
+        );
+    } catch (error) {
+      alert('Something went wrong.');
+    }
     props.resetForm();
     props.setSubmitting(false);
-    navigate('home');
+    navigate('/home');
   };
 
   return (
@@ -32,7 +49,12 @@ const SignUp = () => {
       <Paper className='PaperStyle' elevation={24}>
         <Grid item className='SignUpTitle'>
           <h2>Sign Up</h2>
-          <Typography variant='caption' gutterBottom>Please fill this form to create an account</Typography>
+          <Typography variant='caption' gutterBottom>Please fill this form to create an account</Typography><br/>
+          <Typography variant='caption' gutterBottom>Already have an account?{' '}
+            <Link to='signIn' className='underline'>
+              Sign in
+            </Link>
+          </Typography>
         </Grid>
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSignUp}>
           {(props) => (
@@ -62,9 +84,11 @@ const SignUp = () => {
               <div className='Error'>
                 <ErrorMessage name='email' />
               </div>
-
               <Grid item align='center'>
-                <Button type='submit' variant='contained' disabled={props.isSubmitting || !props.isValid || !props.dirty}
+                <Button
+                  type='submit'
+                  variant='contained'
+                  disabled={props.isSubmitting || !props.isValid || !props.dirty}
                   color='primary'>Sign up
                 </Button>
               </Grid>

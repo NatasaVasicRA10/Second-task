@@ -23,7 +23,9 @@ const DeleteNote = ({handleDelete, id, title, text, date, noteColor}) => {
         </FormLabel>
       </Grid>
       <Grid item className='DeleteButtonPosition' xs={5}>
-        <button className='DeleteButton' style ={{backgroundColor: noteColor}} onClick={() => handleDelete(id)}><DeleteForeverIcon/></button>
+        <button className='DeleteButton' style ={{backgroundColor: noteColor}} onClick={() => handleDelete(id)}>
+          <DeleteForeverIcon/>
+        </button>
       </Grid>
     </Grid>
   );

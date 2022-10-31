@@ -18,11 +18,25 @@ const NoteList = ({notes, handleAdd, handleDelete}) => {
     <Grid container spacing={{sm: 1, md: 3, lg: 6, xl: 12}} rowSpacing={5}>
       {notes.map((note) => (
         <Grid item xs={12} md={4} lg={4} xl={3} key={note.id}>
-          <Note noteColor={note.noteColor}><DeleteNote handleDelete={handleDelete} id={note.id} title={note.title} text={note.text} date={note.date} noteColor={note.noteColor}/></Note>
+          <Note noteColor={note.noteColor}>
+            <DeleteNote
+              handleDelete={handleDelete}
+              id={note.id}
+              title={note.title}
+              text={note.text}
+              date={note.date}
+              noteColor={note.noteColor}/>
+          </Note>
         </Grid>
       ))}
       <Grid item>
-        <Note noteColor={colorNote}><AddNote handleAdd={handleAdd} handleColorChange={handleColorChange} noteLabelColor={noteLabelColor} setNoteLabelColor={setNoteLabelColor}/></Note>
+        <Note noteColor={colorNote}>
+          <AddNote
+            handleAdd={handleAdd}
+            handleColorChange={handleColorChange}
+            noteLabelColor={noteLabelColor}
+            setNoteLabelColor={setNoteLabelColor}/>
+        </Note>
       </Grid>
     </Grid>
   );
