@@ -6,17 +6,22 @@ import SignUp from './components/SignUp';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './components/SignIn';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import theme from './theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path='/' element={<SignUp />} />
-        <Route path='/signIn' element={<SignIn />} />
-        <Route path='/home' element={<App />} />
-      </Routes>
-    </Router>
+    <ChakraProvider>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <Router>
+        <Routes>
+          <Route path='/' element={<SignUp />} />
+          <Route path='/signIn' element={<SignIn />} />
+          <Route path='/home' element={<App />} />
+        </Routes>
+      </Router>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

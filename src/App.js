@@ -3,14 +3,12 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Search from './components/Search';
 import NoteList from './components/NoteList';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Box, Grid } from '@chakra-ui/react';
 import { format } from 'date-fns';
 
 const App = () => {
 
   const [ notes, setNotes ] = useState(JSON.parse(localStorage.getItem('notes')) || []);
-  const [ theme, setTheme ] = useState('light');
   const [ query, setQuery ] = useState('');
   const [ sortType, setSortType ] = useState('ascending');
   const [ startDate, setStartDate ] = useState(null);
@@ -19,14 +17,6 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
-
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  };
 
   const handleAdd = (e, text, noteColor, title) => {
     e.preventDefault();
@@ -102,33 +92,30 @@ const App = () => {
   };
 
   return (
-    <div style={theme==='light' ? {backgroundColor: '#fff', color: '#333'} : {backgroundColor: '#333', color: '#fff'}}>
-      <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Header
-              toggleTheme={toggleTheme}
-              sortType={sortType}
-              handleSort={handleSort}
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-              handleResetNotes={handleResetNotes}/>
-          </Grid>
-          <Grid item xs={12}>
-            <Search handleSearch={handleSearch}></Search>
-          </Grid>
-          <Grid item xs={12}>
-            <NoteList
-              notes={handleNotes()}
-              handleAdd={handleAdd}
-              handleDelete={handleDelete}>
-            </NoteList>
-          </Grid>
+    <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Header
+            sortType={sortType}
+            handleSort={handleSort}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            handleResetNotes={handleResetNotes}/>
         </Grid>
-      </Box>
-    </div>
+        <Grid item xs={12}>
+          <Search handleSearch={handleSearch}></Search>
+        </Grid>
+        <Grid item xs={12}>
+          <NoteList
+            notes={handleNotes()}
+            handleAdd={handleAdd}
+            handleDelete={handleDelete}>
+          </NoteList>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

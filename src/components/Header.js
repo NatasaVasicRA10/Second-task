@@ -1,10 +1,5 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
 import { FaSortAmountUp, FaSortAmountDown } from 'react-icons/fa';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -12,8 +7,11 @@ import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { Button, useColorMode, Grid, FormControl, MenuItem, Select, Input } from '@chakra-ui/react';
 
-const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
+const Header = ({sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const navigate = useNavigate();
 
@@ -34,7 +32,7 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
   return (
     <Grid container spacing={1}>
       <Grid item className='ButtonItemSignOut' xs={12}>
-        <button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</button>
+        <Button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</Button>
       </Grid>
       <Grid item xs={4}>
         <h1><span className='Title'>React</span> Notes</h1>
@@ -42,7 +40,7 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
       <Grid item xs={5}>
       </Grid>
       <Grid item className='ButtonItem' xs={3}>
-        <button className='ButtonToggle' onClick={toggleTheme}>Toggle Mode</button>
+        <Button className='ButtonToggle' onClick={toggleColorMode}>Toggle Mode {colorMode === 'light' ? 'Dark' : 'Light'}</Button>
       </Grid>
       <Grid item xs={2}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -52,7 +50,7 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
             onChange={(newValue) => {
               setStartDate(newValue);
             }}
-            renderInput={(params) => <TextField {...params} className='CustomDatePicker'/>}/>
+            renderInput={(params) => <Input {...params} className='CustomDatePicker'/>}/>
         </LocalizationProvider>
       </Grid>
       <Grid item xs={2}>
@@ -63,11 +61,11 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
             onChange={(newValue) => {
               setEndDate(newValue);
             }}
-            renderInput={(params) => <TextField {...params} className='CustomDatePicker'/>}/>
+            renderInput={(params) => <Input {...params} className='CustomDatePicker'/>}/>
         </LocalizationProvider>
       </Grid>
       <Grid item xs={2}>
-        <button className='ButtonReset' onClick={handleResetNotes}>Reset</button>
+        <Button className='ButtonReset' onClick={handleResetNotes}>Reset</Button>
       </Grid>
       <Grid item className='SelectItem' xs={6}>
         <FormControl className='FormControl' variant='standard'>
