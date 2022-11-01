@@ -1,23 +1,33 @@
 import React from 'react';
-import { FaSortAmountUp, FaSortAmountDown } from 'react-icons/fa';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { FaSortAmountUp, FaSortAmountDown } from 'react-icons/fa';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
-import { Button, useColorMode, Grid, FormControl, MenuItem, Select, Input } from '@chakra-ui/react';
+import {
+  Button,
+  useColorMode,
+  Grid,
+  GridItem,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList
+} from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
-const Header = ({sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
+const Header = ({sortType, handleSort, /*startDate, setStartDate, endDate, setEndDate,*/ handleResetNotes}) => {
 
   const { colorMode, toggleColorMode } = useColorMode();
 
   const navigate = useNavigate();
 
-  const NewIcon = () => {
-    return sortType === 'descending' ? <FaSortAmountDown/> : < FaSortAmountUp/>;
-  };
+  // const NewIcon = () => {
+  //   return sortType === 'descending' ? <FaSortAmountDown/> : < FaSortAmountUp/>;
+  // };
 
   const sortItems = [
     {id: 1, title: 'ASCENDING', content: 'ascending'},
@@ -30,20 +40,18 @@ const Header = ({sortType, handleSort, startDate, setStartDate, endDate, setEndD
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid item className='ButtonItemSignOut' xs={12}>
+    <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+      <GridItem className='ButtonItemSignOut'>
         <Button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</Button>
-      </Grid>
-      <Grid item xs={4}>
+      </GridItem>
+      <GridItem>
         <h1><span className='Title'>React</span> Notes</h1>
-      </Grid>
-      <Grid item xs={5}>
-      </Grid>
-      <Grid item className='ButtonItem' xs={3}>
+      </GridItem>
+      <GridItem className='ButtonItem'>
         <Button className='ButtonToggle' onClick={toggleColorMode}>Toggle Mode {colorMode === 'light' ? 'Dark' : 'Light'}</Button>
-      </Grid>
-      <Grid item xs={2}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+      </GridItem>
+      <GridItem>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label='Start date'
             value={startDate}
@@ -51,10 +59,10 @@ const Header = ({sortType, handleSort, startDate, setStartDate, endDate, setEndD
               setStartDate(newValue);
             }}
             renderInput={(params) => <Input {...params} className='CustomDatePicker'/>}/>
-        </LocalizationProvider>
-      </Grid>
-      <Grid item xs={2}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        </LocalizationProvider> */}
+      </GridItem>
+      <GridItem>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label='End date'
             value={endDate}
@@ -62,28 +70,25 @@ const Header = ({sortType, handleSort, startDate, setStartDate, endDate, setEndD
               setEndDate(newValue);
             }}
             renderInput={(params) => <Input {...params} className='CustomDatePicker'/>}/>
-        </LocalizationProvider>
-      </Grid>
-      <Grid item xs={2}>
+        </LocalizationProvider> */}
+      </GridItem>
+      <GridItem>
         <Button className='ButtonReset' onClick={handleResetNotes}>Reset</Button>
-      </Grid>
-      <Grid item className='SelectItem' xs={6}>
-        <FormControl className='FormControl' variant='standard'>
-          <Select
-            displayEmpty
-            value={sortType}
-            onChange={handleSort}
-            disableUnderline
-            IconComponent = {NewIcon}
-            className='Select'>
+      </GridItem>
+      <GridItem className='SelectItem'>
+        <Menu>
+          <MenuButton as={Button} value={sortType} rightIcon={<ChevronDownIcon />} onClick={handleSort}>
+            Actions
+          </MenuButton>
+          <MenuList>
             {sortItems.map((sortItem) => (
               <MenuItem key={sortItem.id} value={sortItem.content}>
                 {sortItem.title}
               </MenuItem>
             ))}
-          </Select>
-        </FormControl>
-      </Grid>
+          </MenuList>
+        </Menu>
+      </GridItem>
     </Grid>
   );
 };
