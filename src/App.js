@@ -1,11 +1,12 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from './components/Header';
 import Search from './components/Search';
 import NoteList from './components/NoteList';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { format } from 'date-fns';
+import { AuthContext } from './components/AuthUserProvider';
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
   const [ sortType, setSortType ] = useState('ascending');
   const [ startDate, setStartDate ] = useState(null);
   const [ endDate, setEndDate ] = useState(null);
+  const [userAuth] = useContext(AuthContext);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -114,7 +116,8 @@ const App = () => {
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
-              handleResetNotes={handleResetNotes}/>
+              handleResetNotes={handleResetNotes}
+              userAuth = {userAuth}/>
           </Grid>
           <Grid item xs={12}>
             <Search handleSearch={handleSearch}></Search>

@@ -13,7 +13,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 
-const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
+const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes, userAuth}) => {
 
   const navigate = useNavigate();
 
@@ -33,7 +33,13 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
 
   return (
     <Grid container spacing={1}>
-      <Grid item className='ButtonItemSignOut' xs={12}>
+      <Grid item xs={12}>
+        <h2>Hello {userAuth?.displayName}!</h2>
+      </Grid>
+      <Grid item xs={6}>
+        <h3>email: {userAuth?.email}</h3>
+      </Grid>
+      <Grid item className='ButtonItemSignOut' xs={6}>
         <button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</button>
       </Grid>
       <Grid item xs={4}>
@@ -100,5 +106,6 @@ Header.propTypes = {
   setStartDate: PropTypes.func,
   endDate: PropTypes.any,
   setEndDate: PropTypes.func,
-  handleResetNotes: PropTypes.func
+  handleResetNotes: PropTypes.func,
+  userAuth: PropTypes.object
 };

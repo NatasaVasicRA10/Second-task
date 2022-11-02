@@ -6,17 +6,20 @@ import SignUp from './components/SignUp';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './components/SignIn';
+import AuthUserProvider from './components/AuthUserProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path='/' element={<SignUp />} />
-        <Route path='/signIn' element={<SignIn />} />
-        <Route path='/home' element={<App />} />
-      </Routes>
-    </Router>
+    <AuthUserProvider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<SignUp />} />
+          <Route path='/signIn' element={<SignIn />} />
+          <Route path='/home' element={ <App />} />
+        </Routes>
+      </Router>
+    </AuthUserProvider>
   </React.StrictMode>
 );
 
