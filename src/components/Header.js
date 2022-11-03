@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import { FaSortAmountUp, FaSortAmountDown } from 'react-icons/fa';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,10 +12,12 @@ import PropTypes from 'prop-types';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthUserProvider';
 
-const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes, userAuth}) => {
+const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
 
   const navigate = useNavigate();
+  const {user} = useContext(AuthContext);
 
   const NewIcon = () => {
     return sortType === 'descending' ? <FaSortAmountDown/> : < FaSortAmountUp/>;
@@ -34,10 +36,10 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <h2>Hello {userAuth?.displayName}!</h2>
+        <h2>Hello {user?.userData.displayName}!</h2>
       </Grid>
       <Grid item xs={6}>
-        <h3>email: {userAuth?.email}</h3>
+        <h3>email: {user?.userData.email}</h3>
       </Grid>
       <Grid item className='ButtonItemSignOut' xs={6}>
         <button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</button>
