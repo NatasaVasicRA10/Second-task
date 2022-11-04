@@ -10,6 +10,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
 
@@ -33,13 +35,19 @@ const SignIn = () => {
     } catch (error) {
       switch (error.message) {
         case 'Firebase: Error (auth/wrong-password).':
-          alert('Wrong password');
+          toast.error('Wrong password.', {
+            position: toast.POSITION.TOP_RIGHT
+          });
           break;
         case 'Firebase: Error (auth/user-not-found).':
-          alert('No user found with this email.');
+          toast.error('No user found with this email.', {
+            position: toast.POSITION.TOP_RIGHT
+          });
           break;
         default:
-          alert('Login failed. Please try again.');
+          toast.error('Login failed. Please try again.', {
+            position: toast.POSITION.TOP_RIGHT
+          });
           break;
       }
     }
@@ -47,6 +55,7 @@ const SignIn = () => {
 
   return (
     <Grid container className='SignUpGridStyle' spacing={2}>
+      <ToastContainer />
       <Paper className='PaperStyle' elevation={24}>
         <Grid item className='SignUpTitle'>
           <h2>Sign In</h2>

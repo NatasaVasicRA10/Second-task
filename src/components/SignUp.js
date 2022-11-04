@@ -10,6 +10,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
 
@@ -34,10 +36,14 @@ const SignUp = () => {
         auth.currentUser,
         {displayName: values.name + ' ' + values.lastName})
         .catch(
-          () => alert('Something went wrong.')
+          () => toast.error('Something went wrong.', {
+            position: toast.POSITION.TOP_RIGHT
+          })
         );
     } catch (error) {
-      alert('Something went wrong.');
+      toast.error('Something went wrong.', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
     props.resetForm();
     props.setSubmitting(false);
@@ -46,6 +52,7 @@ const SignUp = () => {
 
   return (
     <Grid container className='SignUpGridStyle' spacing={2}>
+      <ToastContainer />
       <Paper className='PaperStyle' elevation={24}>
         <Grid item className='SignUpTitle'>
           <h2>Sign Up</h2>
