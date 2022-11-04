@@ -7,24 +7,14 @@ export const AuthContext = createContext([]);
 const AuthUserProvider = (props) => {
 
   const [ user, setUser ] = useState({
-    isLoggedIn: false,
-    isLoading: true,
-    userData: undefined
+    userData: null
   });
 
   useEffect(() => {
     const subscribe = auth.onAuthStateChanged(loggedUser => {
       if (loggedUser) {
         setUser({
-          isLoggedIn: true,
-          isLoading: false,
-          userData: loggedUser,
-        });
-      } else {
-        setUser({
-          isLoggedIn: false,
-          isLoading: true,
-          userData: undefined
+          userData: loggedUser
         });
       }
     });

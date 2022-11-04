@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from './AuthUserProvider';
+import { useAuth } from './AuthUserProvider';
 
 const PrivateRoutes = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   return (
-    user.isLoggedIn ? <Outlet/> : (user.isLoading ? 'Loading...' : <Navigate to='/'/>)
+    user.userData ? <Outlet/> : <Navigate to='/'/>
   );
 };
 
