@@ -1,22 +1,17 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth } from '../firebase';
 import PropTypes from 'prop-types';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export const AuthContext = createContext([]);
 
 const AuthUserProvider = (props) => {
 
-  const [ user, setUser ] = useState({
-    userData: null
-  });
+  const [ user, setUser ] = useState({});
 
   useEffect(() => {
-    const subscribe = auth.onAuthStateChanged(loggedUser => {
-      if (loggedUser) {
-        setUser({
-          userData: loggedUser
-        });
-      }
+    const subscribe = onAuthStateChanged(auth, loggedUser => {
+      setUser(loggedUser);
     });
     return () => {
       subscribe();

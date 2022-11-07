@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from './Header';
 import Search from './Search';
 import NoteList from './NoteList';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { format } from 'date-fns';
+import { AuthContext } from './AuthUserProvider';
 
 const HomePage = () => {
 
@@ -14,6 +15,8 @@ const HomePage = () => {
   const [ sortType, setSortType ] = useState('ascending');
   const [ startDate, setStartDate ] = useState(null);
   const [ endDate, setEndDate ] = useState(null);
+
+  const {user} = useContext(AuthContext);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -99,6 +102,10 @@ const HomePage = () => {
     });
     return newNotes;
   };
+
+  if (Object.keys(user).length === 0) {
+    return;
+  }
 
   return (
     <div style={theme==='light' ? {backgroundColor: '#fff', color: '#333'} : {backgroundColor: '#333', color: '#fff'}}>

@@ -36,10 +36,10 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <h2>Hello {user?.userData.displayName}!</h2>
+        <h2>Hello {user?.displayName}!</h2>
       </Grid>
       <Grid item xs={6}>
-        <h3>email: {user?.userData.email}</h3>
+        <h3>email: {user?.email}</h3>
       </Grid>
       <Grid item className='ButtonItemSignOut' xs={6}>
         <button className='ButtonToggle ButtonSignOut' onClick={logout}>Sign out</button>
