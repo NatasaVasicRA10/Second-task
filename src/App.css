@@ -226,12 +226,22 @@
     text-align: center;
     font-size: 16px;
     border-radius: 20px;
-    width: auto;
+    width: 100%;
     cursor: pointer;
     height: 100%;
     padding-left: 4%;
     padding-right: 4%;
 }
 
-
-
+.EditButton {
+    background-color: rgb(231, 231, 231);
+    border: 4px solid rgb(0, 128, 85);
+    text-align: center;
+    font-size: 16px;
+    border-radius: 20px;
+    width: auto;
+    cursor: pointer;
+    height: 100%;
+    width: 25%;
+    margin-right: 6% !important;
+}

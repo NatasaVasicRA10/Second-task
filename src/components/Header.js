@@ -14,7 +14,7 @@ import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthUserProvider';
 
-const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes}) => {
+const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, endDate, setEndDate, handleResetNotes, handleDeleteAllNotes}) => {
 
   const navigate = useNavigate();
   const {user} = useContext(AuthContext);
@@ -74,10 +74,13 @@ const Header = ({toggleTheme, sortType, handleSort, startDate, setStartDate, end
             renderInput={(params) => <TextField {...params} className='CustomDatePicker'/>}/>
         </LocalizationProvider>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={1}>
         <button className='ButtonReset' onClick={handleResetNotes}>Reset</button>
       </Grid>
-      <Grid item className='SelectItem' xs={6}>
+      <Grid item xs={2}>
+        <button className='ButtonReset' onClick={handleDeleteAllNotes}>Delete all notes</button>
+      </Grid>
+      <Grid item className='SelectItem' xs={5}>
         <FormControl className='FormControl' variant='standard'>
           <Select
             displayEmpty
@@ -109,5 +112,6 @@ Header.propTypes = {
   endDate: PropTypes.any,
   setEndDate: PropTypes.func,
   handleResetNotes: PropTypes.func,
-  userAuth: PropTypes.object
+  userAuth: PropTypes.object,
+  handleDeleteAllNotes: PropTypes.func
 };

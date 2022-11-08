@@ -120,6 +120,11 @@ const HomePage = () => {
     return;
   }
 
+  const handleDeleteAllNotes = () => {
+    setNotes([]);
+    localStorage.setItem([]);
+  };
+
   return (
     <div style={theme==='light' ? {backgroundColor: '#fff', color: '#333'} : {backgroundColor: '#333', color: '#fff'}}>
       <Box sx={{ flexGrow: 1 }} mx={12} mt={6} mb={6}>
@@ -133,7 +138,8 @@ const HomePage = () => {
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
-              handleResetNotes={handleResetNotes}/>
+              handleResetNotes={handleResetNotes}
+              handleDeleteAllNotes={handleDeleteAllNotes}/>
           </Grid>
           <Grid item xs={12}>
             <Search handleSearch={handleSearch}></Search>

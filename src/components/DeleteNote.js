@@ -16,39 +16,37 @@ const DeleteNote = ({handleDelete, id, title, text, date, noteColor, handleEdit}
   return (
     <div>
       {edit ? (
-        <Grid container spacing={2}>
-          <form onSubmit={(e) => handleEdit(e, id, editTitle, editText, date, noteColor) || setEdit(!edit)}>
-            <Grid container spacing={2}>
-              <Grid item className='AddNoteItem' xs={12}>
-                <TextField
-                  className='AddNoteTextField'
-                  defaultValue={editTitle}
-                  required={true}
-                  variant='standard'
-                  InputProps={{disableUnderline: true}}
-                  onChange={(e) => {
-                    setEditTitle(e.target.value);
-                  }}/>
-              </Grid>
-              <Grid item className='AddNoteItem' xs={12}>
-                <TextareaAutosize
-                  minRows={10}
-                  className='AddNoteTextArea'
-                  maxLength={300}
-                  required={true}
-                  defaultValue={editText}
-                  onChange={(e) => {
-                    setEditText(e.target.value);
-                  }}/>
-              </Grid>
-              <Grid item className='DeleteButtonPosition' xs={5}>
-                <button className='AddButton'>
-                  Edit
-                </button>
-              </Grid>
+        <form onSubmit={(e) => handleEdit(e, id, editTitle, editText, date, noteColor) || setEdit(!edit)}>
+          <Grid container spacing={2}>
+            <Grid item className='AddNoteItem' xs={12}>
+              <TextField
+                className='AddNoteTextField'
+                defaultValue={editTitle}
+                required={true}
+                variant='standard'
+                InputProps={{disableUnderline: true, style: {fontSize: 24, background: 'white'}}}
+                onChange={(e) => {
+                  setEditTitle(e.target.value);
+                }}/>
             </Grid>
-          </form>
-        </Grid>
+            <Grid item className='AddNoteItem' xs={12}>
+              <TextareaAutosize
+                minRows={10}
+                className='AddNoteTextArea'
+                maxLength={300}
+                required={true}
+                defaultValue={editText}
+                onChange={(e) => {
+                  setEditText(e.target.value);
+                }}/>
+            </Grid>
+            <Grid item className='DeleteButtonPosition' xs={12}>
+              <button className='EditButton'>
+                Edit
+              </button>
+            </Grid>
+          </Grid>
+        </form>
       ) : (
         <Grid container spacing={2}>
           <Grid item xs={12}>
