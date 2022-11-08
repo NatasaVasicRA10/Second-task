@@ -128,6 +128,7 @@
     border: none !important; 
     cursor: pointer;
     color: black !important;
+    margin-left: 4%;
 }
 
 .AddNoteItem {
@@ -231,7 +232,6 @@
     padding-left: 4%;
     padding-right: 4%;
 }
-
 
 
 
