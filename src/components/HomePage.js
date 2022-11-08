@@ -46,6 +46,19 @@ const HomePage = () => {
     setNotes(listNotes);
   };
 
+  const handleEdit = (e, id, title, text, date, noteColor) => {
+    e.preventDefault();
+
+    const editNote = notes.map(note => {
+      if (note.id === id) {
+        return {id: id, title: title, text: text, date: date, noteColor: noteColor};
+      }
+      return note;
+    });
+
+    localStorage.setItem('notes', JSON.stringify(editNote));
+  };
+
   const handleDelete = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
@@ -129,7 +142,8 @@ const HomePage = () => {
             <NoteList
               notes={handleNotes()}
               handleAdd={handleAdd}
-              handleDelete={handleDelete}>
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}>
             </NoteList>
           </Grid>
         </Grid>

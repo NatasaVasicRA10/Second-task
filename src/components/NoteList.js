@@ -5,10 +5,12 @@ import AddNote from './AddNote';
 import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 
-const NoteList = ({notes, handleAdd, handleDelete}) => {
+const NoteList = ({notes, handleAdd, handleDelete, handleEdit}) => {
 
   const [ colorNote, setColorNote ] = useState('#d4b055');
   const [ noteLabelColor, setNoteLabelColor ] = useState('#f5cf6e');
+  const [ title, setTitle ]= useState('');
+  const [ text, setText ]= useState('');
 
   const handleColorChange = (color) => {
     setColorNote(color);
@@ -25,7 +27,8 @@ const NoteList = ({notes, handleAdd, handleDelete}) => {
               title={note.title}
               text={note.text}
               date={note.date}
-              noteColor={note.noteColor}/>
+              noteColor={note.noteColor}
+              handleEdit={handleEdit}/>
           </Note>
         </Grid>
       ))}
@@ -35,7 +38,11 @@ const NoteList = ({notes, handleAdd, handleDelete}) => {
             handleAdd={handleAdd}
             handleColorChange={handleColorChange}
             noteLabelColor={noteLabelColor}
-            setNoteLabelColor={setNoteLabelColor}/>
+            setNoteLabelColor={setNoteLabelColor}
+            title={title}
+            setTitle={setTitle}
+            text={text}
+            setText={setText}/>
         </Note>
       </Grid>
     </Grid>
@@ -47,5 +54,6 @@ export default NoteList;
 NoteList.propTypes = {
   notes: PropTypes.array,
   handleAdd: PropTypes.func,
-  handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func
 };

@@ -14,12 +14,10 @@ export const labelColor = {
   yellow: '#e6f5ab'
 };
 
-const AddNote = ({handleAdd, handleColorChange, noteLabelColor, setNoteLabelColor}) => {
+const AddNote = ({handleAdd, handleColorChange, noteLabelColor, setNoteLabelColor, title, setTitle, text, setText}) => {
 
   const [ count, setCount ] = useState(300);
-  const [ text, setText ]= useState('');
   const [ noteColor, setNoteColor ]= useState('#d4b055');
-  const [ title, setTitle ]= useState('');
 
   const colorList = [ '#d4b055', '#ed8c77', '#c187d6', '#39d0db', '#e2fa84' ];
 
@@ -99,5 +97,9 @@ AddNote.propTypes = {
   handleAdd: PropTypes.func,
   handleColorChange: PropTypes.func,
   noteLabelColor: PropTypes.string,
-  setNoteLabelColor: PropTypes.func
+  setNoteLabelColor: PropTypes.func,
+  title: PropTypes.string,
+  setTitle: PropTypes.func,
+  text: PropTypes.string,
+  setText: PropTypes.func
 };
